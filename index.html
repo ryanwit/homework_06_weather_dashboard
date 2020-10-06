@@ -4,18 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+     <!-- We link our html to the Bootstrap -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
 
-    <h1>Weather Dashboard</h1>
+    <!-- As a heading -->
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
+    </nav>
+    <div class = "container-fluid">
+        <div class="row">
+            <aside class="col-lg-3">
+                <h3>search for city</h3>
+                <div class="form-inline form-group">
+                    <input type="text" class="form-control" id="inputbox"/>
+                    <button class="btn-primary btn" id="search">Submit</button>
+                </div>
+                <ul class="list-group history"></ul>
+            </aside>
+            <div class="col-lg-9">
+                <div id="today"></div>
+                <div id="forecast"></div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <!-- <h1>Weather Dashboard</h1>
     <input type="text" id="search-value" placeholder="search for a city">
     <button class="btn btn-primary" id="search-button">Search</button>
 
-    <div id="today"></div>
+    
 
     <br>
 
-    <div id="forecast"></div>
+    
 
     <!-- Loading JavaScript Tags & Jquery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
