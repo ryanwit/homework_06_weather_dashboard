@@ -9,40 +9,9 @@ var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + testCity +
         var value = $("#inputbox").val()
         $("#inputbox").val("")
         currentDay(value);
+        forecast(forecastval);
 
     })
-    
-
-// ----------Section to test weather ---------
-// function showWeather(e) {
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-//     }).then (function(response) {
-//         console.log(response);
-//         console.log(response.data);
-//         console.log(response.main.temp);
-//         console.log(response.main.humidity);
-//         console.log(response.wind.speed);
-//         console.log(response.coord.lon);
-//         console.log(response.coord.lat);  
-//     });
-// };
-// showWeather();
-
- // -------Section to Find UV Index------------
-// lon = response.coord.lon
-// lat = response.coord.lat
-
-// $.ajax({
-//     url: "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey
-//     method: "GET",
-//     }).then (function(response) {
-//     console.log(response);
-
-
-
-
 // ---------------------------CREATE FUNCTION FOR CURRENT DAY-------------
 function currentDay(value) {
     $.ajax({
@@ -52,13 +21,35 @@ function currentDay(value) {
         }).then(function(response) {
             console.log(response)
             $("#today").empty();
+            var title = $("<h2>")
+                .addClass("card-title")
+                .text("Today's Weather for:  " + response.name);
+            var temp = $("<p>") 
+                .addClass("card-text")
+                .text("Temperature: " + response.main.temp + "°F");
             var wind = $("<p>")
                 // try creating cards in jquery 
                 .text("Wind Speed: " + response.wind.speed + "mph");
             var humidity = $("<p>")
                 .text("Humidity: " + response.main.humidity + "%");
-                $("#today").append(wind, humidity);
+            // var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
+                $("#today").append(title, temp, wind, humidity);
+            
                 // at the end of this.then call UV function and pass through response.coord.lat / lon
+
+        })
+    }
+
+    // ---------------------------CREATE FUNCTION FOR FORECAST-------------
+function forecast(data) {
+    $.ajax({
+        type: "GET",
+        url: 
+        "https://api.openweathermap.org/data/2.5/forecast?q=" + value + APIKey + "&units=imperial"
+        dataType: "json"
+        }).then(function(forecastval) {
+            console.log(forecastval)
+            $("#forecast").html("");
 
         })
     }
