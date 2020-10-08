@@ -6,6 +6,7 @@
     <title>Weather Dashboard</title>
      <!-- We link our html to the Bootstrap -->
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
 </head>
 <body>
 
@@ -19,7 +20,7 @@
                 <h5>Search for your city</h5>
                 <div class="form-inline form-group">
                     <input type="text" class="form-control" id="inputbox"/>
-                    <button class="btn-primary btn" id="search">Submit</button>
+                    <button class="btn-primary btn" id="search" >Submit</button>
                 </div>
                 <ul class="list-group history"></ul>
             </aside>
@@ -30,8 +31,6 @@
         </div>
     </div>
     
-
-
     
 
     <!-- Loading JavaScript Tags & Jquery -->
