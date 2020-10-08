@@ -7,12 +7,12 @@ $("#search").on("click", function () {
   var value = $("#inputbox").val();
   $("#inputbox").val("");
   currentDay(value);
-  createButton(value);
-  if(citiesStorage.indexOf(value)===-1) {
-      citiesStorage.push(value)
-      localStorage.setItem("citiesStorage", JSON.stringify(citiesStorage))
-      createButton(value);
-  }
+  // createButton(value);
+  // if(citiesStorage.indexOf(value)===-1) {
+  //     citiesStorage.push(value)
+  //     localStorage.setItem("citiesStorage", JSON.stringify(citiesStorage))
+  //     createButton(value);
+  // }
 });
 // ---------------------------CREATE FUNCTION FOR CURRENT DAY-------------
 function currentDay(value) {
@@ -24,6 +24,11 @@ function currentDay(value) {
       APIKey +
       "&units=imperial",
   }).then(function (response) {
+    if(userSearch.indexOf(value)===-1) {
+          userSearch.push(value)
+          localStorage.setItem("userSearch", JSON.stringify(userSearch))
+          createButton(value);
+      }
     console.log(response);
     $("#today").empty();
     var title = $("<h2>")
@@ -92,14 +97,26 @@ function uvIndex(lat, lon) {
   $.ajax({
     method: "GET",
     url:
-      "https://api.openweathermap.org/data/2.5/uvi?lat" + lat + "&lon" + lon + APIKey,
+      "http://api.openweathermap.org/data/2.5/uvi?" + APIKey + "&lat=" + lat + "&lon=" + lon,
     dataType: "json"
   }).then(function (response) {
     console.log(response);
-    var uvi = $("<p>").text("UV INDEX: " + response.value);
-    $("#today").append(humidity, uvi);
+    var uvi = $("<button>").text("UV INDEX: " + response.value);
+    if (response.value < 3) {
+      uvi.addClass("btn-success")
+    } else if (response.value > 7) {
+      uvi.addClass("btn-danger")
+    } else {
+      uvi.addClass("btn-warning")
+    }
+    
+    $("#today").append(uvi);
   });
 }
 
-
+// create button function
+function createButton(userSearch) {
+  var li = $("<li>").text(userSearch)
+  $(".history").append(li)
+}
 
